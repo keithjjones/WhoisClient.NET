@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 11
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoisClientWebSite", "WhoisClientWebSite\WhoisClientWebSite.csproj", "{87F2EEE3-C63C-4ED0-AFE8-0E9E3EB78B7E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhoisClient.NET", "WhoisClient.NET\WhoisClient.NET.csproj", "{9C98212B-41D1-4160-AFD3-31D6E314EF7A}"
