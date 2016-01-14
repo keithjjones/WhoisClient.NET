@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<package >
+  <metadata>
+    <id>WhoisClient.NET</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>J.Sakamoto</authors>
+    <owners>J.Sakamoto</owners>
+    <copyright>Copyright 2012-2014 J.Sakamoto, Ms-PL License.</copyright>
+    <licenseUrl>http://whoisclient.codeplex.com/license</licenseUrl>
+    <projectUrl>http://whoisclient.codeplex.com/</projectUrl>
+    <!--
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    -->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      This library is the client of WHOIS protocol, to search owner informations by domain name, or IP address.
+      So this library determine WHOIS server automatically and query to referral server recursive, then you can skip explicitly specification of whois server.
+      The response of whois query contains strong typed values, and Raw string.
+    </description>
+    <releaseNotes>
+      <![CDATA[
+      ver.1.0.2 - Fix bug with port number referral server response.
+      ver.1.0.1 - Single out one record when querying domain.
+    ]]>
+    </releaseNotes>
+    <tags>whois</tags>
+  </metadata>
+</package>

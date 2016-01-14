@@ -1,0 +1,15 @@
+﻿@model Whois.NET.WhoisResponse
+<h4>Responded Server(s)</h4>
+<div>@string.Join(" > ", Model.RespondedServers)</div>
+        
+@if (Model.AddressRange != null)
+{
+    <h4>IP address range</h4>
+    @(Model.AddressRange.Begin)<span> - </span>@(Model.AddressRange.End)
+}
+            
+<h4>Organization Name</h4>
+@Model.OrganizationName
+
+<h4>Raw</h4>
+@Html.Raw(HttpUtility.HtmlEncode(Model.Raw).Replace(" ", "&nbsp;").Replace("\n", "<br/>"))
