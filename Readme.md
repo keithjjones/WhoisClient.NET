@@ -6,7 +6,7 @@ This is .NET Class library implementing a WHOIS client.
 To install this library into your application, use the NuGet repository.
 
 ```
-PM> Install-Package WhoisClient-VS2015.NET
+PM> Install-Package WhoisClient.NET-VS2015
 ```
 
 # Sample source code (C#)
