@@ -33,6 +33,14 @@ namespace WhoisClient_NET.Test
         }
 
         [TestMethod]
+        public void WhoisClientIP3Test()
+        {
+            WhoisResponse response = WhoisClient.Query("108.234.177.20");
+            Assert.AreEqual("AT&T Internet Services", response.OrganizationName);
+            Assert.AreEqual("108.192.0.0-108.255.255.255", response.AddressRange.ToString());
+        }
+
+        [TestMethod]
         public void WhoisClientDomainTest()
         {
             WhoisResponse response = WhoisClient.Query("facebook.com");

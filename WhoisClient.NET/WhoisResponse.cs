@@ -58,8 +58,14 @@ namespace Whois.NET
                 if (m3.Count > 0)
                 {
                     var mymatch = m3[m3.Count - 1];
-                    this.AddressRange = IPAddressRange.Parse(mymatch.Groups["adr"].Value);
-                    this.OrganizationName = mymatch.Groups["org"].Value.Trim();
+                    // Test to see if the information was already picked up from above
+                    if (mymatch.Groups["org"].Value.Trim() != "NetRange:" &&
+                        mymatch.Groups["org"].Value.Trim() != "CIDR:" &&
+                        mymatch.Groups["org"].Value.Trim() != "inetnum:")
+                    {
+                        this.AddressRange = IPAddressRange.Parse(mymatch.Groups["adr"].Value);
+                        this.OrganizationName = mymatch.Groups["org"].Value.Trim();
+                    }
                 }
             }
 
