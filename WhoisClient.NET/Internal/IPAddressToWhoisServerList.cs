@@ -60,7 +60,7 @@ namespace Whois.NET.Internal
         {
             _List.Add(new IPAddrToWhoisSvrMap
             {
-                IPAddressRange = new IPAddressRange(ipRangeString),
+                IPAddressRange = IPAddressRange.Parse(ipRangeString),
                 WhoisServer = whoisServerName
             });
         }

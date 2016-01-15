@@ -52,10 +52,19 @@ namespace Whois.NET
         private static WhoisResponse QueryRecursive(string query, List<string> servers, int port, Encoding encoding)
         {
             var server = servers.Last();
+
+            // Remove the "domain" command from other servers
+            if (server != "whois.internic.net")
+            {
+                query = query.Split(' ').Last();
+            }
+
             var rawResponse = RawQuery(query, server, port, encoding);
 
+            // This is causing issues with other whois servers through Internic.net
+            // This seems to only apply to Internic.  Will add another test.
             var m1 = Regex.Match(rawResponse, @"To single out one record", RegexOptions.Multiline);
-            if (m1.Success)
+            if (m1.Success && server == "whois.internic.net")
             {
                 return QueryRecursive("domain " + query, servers, port, encoding);
             }
@@ -64,6 +73,7 @@ namespace Whois.NET
             // "remarks:        at whois.nic.ad.jp. To obtain an English output"
             var m2 = Regex.Match(rawResponse,
                 @"(^ReferralServer:\W+whois://(?<refsvr>[^:\r\n]+)(:(?<port>\d+))?)|" +
+                @"(^\s*Whois Server:\s*(?<refsvr>[^:\r\n]+)(:(?<port>\d+))?)|" +
                 @"(^remarks:\W+.*(?<refsvr>whois\.[0-9a-z\-\.]+\.[a-z]{2})(:(?<port>\d+))?)",
                 RegexOptions.Multiline);
             if (m2.Success)

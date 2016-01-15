@@ -32,7 +32,7 @@ namespace Whois.NET
             // resolve Organization Name.
             var m1 = Regex.Match(this.Raw,
                 @"(^f\.\W*\[組織名\]\W+(?<orgName>[^\r\n]+))|" +
-                @"(^(OrgName|descr):\W+(?<orgName>[^\r\n]+))",
+                @"(^\s*(OrgName|descr|Registrant Organization):\W+(?<orgName>[^\r\n]+))",
                 RegexOptions.Multiline);
             if (m1.Success)
             {

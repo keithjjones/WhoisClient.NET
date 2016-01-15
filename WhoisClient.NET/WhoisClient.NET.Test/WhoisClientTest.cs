@@ -32,5 +32,13 @@ namespace WhoisClient_NET.Test
             Assert.AreEqual("65.100.0.0-65.103.255.255", response.AddressRange.ToString());
         }
 
+        [TestMethod]
+        public void WhoisClientDomainTest()
+        {
+            WhoisResponse response = WhoisClient.Query("facebook.com");
+            Assert.AreEqual("Facebook, Inc.", response.OrganizationName);
+            Assert.IsNull(response.AddressRange);
+        }
+
     }
 }
