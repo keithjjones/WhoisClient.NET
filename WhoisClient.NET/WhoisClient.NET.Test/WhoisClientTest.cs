@@ -13,7 +13,7 @@ namespace WhoisClient_NET.Test
             WhoisClient
                 .Query("31.116.94.96")
                 .OrganizationName
-                .Is("T-Mobile (UK) Limited");
+                .Is("EE Limited");
         }
     }
 }
