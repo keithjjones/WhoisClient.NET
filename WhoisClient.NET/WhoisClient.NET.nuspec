@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <package >
   <metadata>
-    <id>WhoisClient.NET-VS2015</id>
+    <id>WhoisClient-VS2015</id>
     <version>20160115.1</version>
-    <title>WhoisClient.NET</title>
+    <title>WhoisClient.NET-VS2015</title>
     <authors>J.Sakamoto, Keith J. Jones</authors>
     <owners>J.Sakamoto, Keith J. Jones</owners>
     <copyright>Copyright 2012-2014 J.Sakamoto; Copyright Keith J. Jones, 2016, Ms-PL License.</copyright>
