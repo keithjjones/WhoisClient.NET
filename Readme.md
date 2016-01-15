@@ -1,16 +1,12 @@
 # Project Description
-This is .NET Class library of WHOIS client (with sample web site).
-
-# Sample Web Site
-Enbale AppHarbor build support.
-The url of sample web site is http://whoisclient.apphb.com/.
+This is .NET Class library implementing a WHOIS client.
 
 # How to install
 
-To install this library into your application, please install from NuGet repository.
+To install this library into your application, use the NuGet repository.
 
 ```
-PM> Install-Package WhoisClient.NET
+PM> Install-Package WhoisClient-VS2015.NET
 ```
 
 # Sample source code (C#)
