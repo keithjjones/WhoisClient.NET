@@ -46,8 +46,20 @@ namespace Whois.NET
                 RegexOptions.Multiline);
             if (m2.Success)
             {
-                this.AddressRange = new IPAddressRange(m2.Groups["adr"].Value);
+                this.AddressRange = IPAddressRange.Parse(m2.Groups["adr"].Value);
             }
+
+            // resolve ARIN Address Range.
+            var m3 = Regex.Matches(this.Raw,
+                @"(?<org>^.*) (?<adr>\d+\.\d+\.\d+\.\d+ - \d+\.\d+\.\d+\.\d+)",
+                RegexOptions.Multiline);
+            if (m3.Count > 0)
+            {
+                var mymatch = m3[m3.Count - 1];
+                this.AddressRange = IPAddressRange.Parse(mymatch.Groups["adr"].Value);
+                this.OrganizationName = mymatch.Groups["org"].Value.Trim();
+            }
+
         }
     }
 }
