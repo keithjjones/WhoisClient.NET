@@ -23,7 +23,9 @@ namespace WhoisClient_NET.Test
         {
             IPAddressToWhoisServerList.Default
                 .FindWhoisServer(IPAddress.Parse("125.0.0.1"))
-                .Is("whois.apnic.net");
+                .Is("whois.arin.net");
+            //.Is("whois.apnic.net");  Everything now goes through ARIN
+
         }
 
         [TestMethod]

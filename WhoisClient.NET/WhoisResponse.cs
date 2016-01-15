@@ -50,14 +50,17 @@ namespace Whois.NET
             }
 
             // resolve ARIN Address Range.
-            var m3 = Regex.Matches(this.Raw,
-                @"(?<org>^.*) (?<adr>\d+\.\d+\.\d+\.\d+ - \d+\.\d+\.\d+\.\d+)",
-                RegexOptions.Multiline);
-            if (m3.Count > 0)
+            if (responsedServers != null && responsedServers.Last() == "whois.arin.net")
             {
-                var mymatch = m3[m3.Count - 1];
-                this.AddressRange = IPAddressRange.Parse(mymatch.Groups["adr"].Value);
-                this.OrganizationName = mymatch.Groups["org"].Value.Trim();
+                var m3 = Regex.Matches(this.Raw,
+                    @"(?<org>^.*) (?<adr>\d+\.\d+\.\d+\.\d+ - \d+\.\d+\.\d+\.\d+)",
+                    RegexOptions.Multiline);
+                if (m3.Count > 0)
+                {
+                    var mymatch = m3[m3.Count - 1];
+                    this.AddressRange = IPAddressRange.Parse(mymatch.Groups["adr"].Value);
+                    this.OrganizationName = mymatch.Groups["org"].Value.Trim();
+                }
             }
 
         }

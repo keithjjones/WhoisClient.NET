@@ -24,5 +24,13 @@ namespace WhoisClient_NET.Test
             Assert.AreEqual("4.4.0.0-4.4.255.255", response.AddressRange.ToString());
         }
 
+        [TestMethod]
+        public void WhoisClientIP2Test()
+        {
+            WhoisResponse response = WhoisClient.Query("65.100.170.169");
+            Assert.AreEqual("Qwest Communications Company, LLC QWEST-INET-115 (NET-65-100-0-0-1)", response.OrganizationName);
+            Assert.AreEqual("65.100.0.0-65.103.255.255", response.AddressRange.ToString());
+        }
+
     }
 }
