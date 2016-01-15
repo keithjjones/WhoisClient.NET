@@ -20,7 +20,7 @@
     </description>
     <releaseNotes>
 	Fixed a number of issues.  Should be more stable.
-      <![CDATA[
+    <![CDATA[
       ver.1.0.2 - Fix bug with port number referral server response.
       ver.1.0.1 - Single out one record when querying domain.
     ]]>
