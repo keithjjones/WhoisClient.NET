@@ -41,6 +41,14 @@ namespace WhoisClient_NET.Test
         }
 
         [TestMethod]
+        public void WhoisClientIP4Test()
+        {
+            WhoisResponse response = WhoisClient.Query("190.190.132.64");
+            Assert.AreEqual("Prima S.A.", response.OrganizationName);
+            Assert.AreEqual("190.0.0.0-190.1.255.255", response.AddressRange.ToString());
+        }
+
+        [TestMethod]
         public void WhoisClientDomainTest()
         {
             WhoisResponse response = WhoisClient.Query("facebook.com");
