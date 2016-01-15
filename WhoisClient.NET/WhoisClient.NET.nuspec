@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>WhoisClient-VS2015</id>
-    <version>20160115.1</version>
+    <version>20160115.2</version>
     <title>WhoisClient.NET-VS2015</title>
     <authors>J.Sakamoto, Keith J. Jones</authors>
     <owners>J.Sakamoto, Keith J. Jones</owners>
@@ -14,13 +14,17 @@
     -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
+	  Fork of the WhoisClient.NET project for VS 2015.
+    </description>
+	<summary>
       This library is a WHOIS protocol client used to search owner information by IP address or domain name.
       This library determines the WHOIS server automatically and queries the referral server recursively.
       The response of the whois query contains strongly typed values, and the raw output.
-    </description>
+	</summary>
     <releaseNotes>
-	Fixed a number of issues.  Should be more stable.
+	Changed package metadata.
     <![CDATA[
+	  20160115.1 - Many bug fixes and enhancements.
       ver.1.0.2 - Fix bug with port number referral server response.
       ver.1.0.1 - Single out one record when querying domain.
     ]]>
