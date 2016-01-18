@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>WhoisClient-VS2015</id>
-    <version>20160115.4</version>
+    <version>20160118.1</version>
     <title>WhoisClient.NET-VS2015</title>
     <authors>J.Sakamoto, Keith J. Jones</authors>
     <owners>J.Sakamoto, Keith J. Jones</owners>
@@ -26,8 +26,10 @@
       The response of the whois query contains strongly typed values, and the raw output.
 	</summary>
     <releaseNotes>
-	Fixed an issue detecting an organization name.
+	
     <![CDATA[
+	  20160118.1 - Moved all queries to start with IANA.  Improved lookup algorithm.
+	  20160115.4 - Fixed an issue detecting an organization name.
 	  20160115.3 - Fixed an issue with an ARIN IP address whois.
 	  20160115.2 - Changed package metadata.
 	  20160115.1 - Many bug fixes and enhancements.
