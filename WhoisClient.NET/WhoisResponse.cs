@@ -13,16 +13,16 @@ namespace Whois.NET
         /// FQDN of WHOIS servers which sent query. The last element is the WHOIS server name that latest queried.
         /// </summary>
         [DataMember]
-        public string[] RespondedServers { get; protected set; }
+        public string[] RespondedServers { get; set; }
 
         [DataMember]
-        public string Raw { get; protected set; }
+        public string Raw { get; set; }
 
         [DataMember]
-        public string OrganizationName { get; protected set; }
+        public string OrganizationName { get; set; }
 
         [DataMember]
-        public IPAddressRange AddressRange { get; protected set; }
+        public IPAddressRange AddressRange { get; set; }
 
         public WhoisResponse()
         {

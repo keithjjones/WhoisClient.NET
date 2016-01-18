@@ -8,15 +8,6 @@ namespace WhoisClient_NET.Test
     public class WhoisClientTest
     {
         [TestMethod]
-        public void RipeReferralTest()
-        {
-            WhoisClient
-                .Query("31.116.94.96")
-                .OrganizationName
-                .Is("EE Limited");
-        }
-
-        [TestMethod]
         public void WhoisClientIPTest()
         {
             WhoisResponse response = WhoisClient.Query("4.4.4.4");
@@ -46,6 +37,14 @@ namespace WhoisClient_NET.Test
             WhoisResponse response = WhoisClient.Query("190.190.132.64");
             Assert.AreEqual("Prima S.A.", response.OrganizationName);
             Assert.AreEqual("190.0.0.0-190.1.255.255", response.AddressRange.ToString());
+        }
+
+        [TestMethod]
+        public void WhoisClientIP5Test()
+        {
+            WhoisResponse response = WhoisClient.Query("31.116.94.96");
+            Assert.AreEqual("EE Limited", response.OrganizationName);
+            Assert.AreEqual("31.64.0.0-31.127.255.255", response.AddressRange.ToString());
         }
 
         [TestMethod]

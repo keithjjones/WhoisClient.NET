@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>WhoisClient-VS2015</id>
-    <version>20160118.2</version>
+    <version>20160118.4</version>
     <title>WhoisClient.NET-VS2015</title>
     <authors>J.Sakamoto, Keith J. Jones</authors>
     <owners>J.Sakamoto, Keith J. Jones</owners>
@@ -28,6 +28,8 @@
     <releaseNotes>
 	
     <![CDATA[
+		20160118.4 - Relaxed more member protections.
+		20160118.3 - Relaxed member protections.
 		20160118.2 - Added default constructor for WhoisResponse.
 		20160118.1 - Moved all queries to start with IANA.  Improved lookup algorithm.
 		20160115.4 - Fixed an issue detecting an organization name.
