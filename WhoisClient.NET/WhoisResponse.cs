@@ -24,6 +24,11 @@ namespace Whois.NET
         [DataMember]
         public IPAddressRange AddressRange { get; protected set; }
 
+        public WhoisResponse()
+        {
+
+        }
+
         public WhoisResponse(string[] responsedServers, string rawWhoisResponse)
         {
             this.RespondedServers = responsedServers;
