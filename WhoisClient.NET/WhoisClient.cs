@@ -7,7 +7,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NetTools;
-using Whois.NET.Internal;
 
 namespace Whois.NET
 {
@@ -28,23 +27,9 @@ namespace Whois.NET
             if (string.IsNullOrEmpty(server))
             {
                 var ipAddress = default(IPAddress);
-                if (IPAddress.TryParse(query, out ipAddress) == true)
-                {
-                    server = IPAddressToWhoisServerList.Default.FindWhoisServer(ipAddress);
-                }
-                else
-                {
-                    var whoissvr = DomainToWhoisServerList.Default.FindWhoisServer(query);
-                    if (whoissvr != null)
-                    {
-                        var parts = whoissvr.Split(':');
-                        server = parts.First();
-                        port = parts.Length > 1 ? int.Parse(parts[1]) : port;
-                    }
-                }
+                IPAddress.TryParse(query, out ipAddress);
+                server = "whois.iana.org";
             }
-
-            if (string.IsNullOrEmpty(server)) throw new ArgumentNullException("server");
 
             return QueryRecursive(query, new List<string> { server }, port, encoding);
         }
@@ -53,20 +38,16 @@ namespace Whois.NET
         {
             var server = servers.Last();
 
+            string rawResponse = "";
+
             // Remove the "domain" command from other servers
-            if (server != "whois.internic.net")
+            if (server == "whois.internic.net" || server == "whois.verisign-grs.com")
             {
-                query = query.Split(' ').Last();
+                rawResponse = RawQuery("domain " + query, server, port, encoding);
             }
-
-            var rawResponse = RawQuery(query, server, port, encoding);
-
-            // This is causing issues with other whois servers through Internic.net
-            // This seems to only apply to Internic.  Will add another test.
-            var m1 = Regex.Match(rawResponse, @"To single out one record", RegexOptions.Multiline);
-            if (m1.Success && server == "whois.internic.net")
+            else
             {
-                return QueryRecursive("domain " + query, servers, port, encoding);
+                rawResponse = RawQuery(query, server, port, encoding);
             }
 
             // "ReferralServer: whois://whois.apnic.net"
@@ -74,6 +55,7 @@ namespace Whois.NET
             var m2 = Regex.Match(rawResponse,
                 @"(^ReferralServer:\W+whois://(?<refsvr>[^:\r\n]+)(:(?<port>\d+))?)|" +
                 @"(^\s*Whois Server:\s*(?<refsvr>[^:\r\n]+)(:(?<port>\d+))?)|" +
+                @"(^\s*refer:\s*(?<refsvr>[^:\r\n]+)(:(?<port>\d+))?)|" +
                 @"(^remarks:\W+.*(?<refsvr>whois\.[0-9a-z\-\.]+\.[a-z]{2})(:(?<port>\d+))?)",
                 RegexOptions.Multiline);
             if (m2.Success)
