@@ -26,7 +26,9 @@ namespace Whois.NET
 
         public WhoisResponse()
         {
-
+            this.RespondedServers = new string[0];
+            this.Raw = "";
+            this.OrganizationName = "";
         }
 
         public WhoisResponse(string[] responsedServers, string rawWhoisResponse)
