@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>WhoisClient-VS2015</id>
-    <version>20160119.1</version>
+    <version>20160119.2</version>
     <title>WhoisClient.NET-VS2015</title>
     <authors>J.Sakamoto, Keith J. Jones</authors>
     <owners>J.Sakamoto, Keith J. Jones</owners>
@@ -27,6 +27,7 @@
 	</summary>
     <releaseNotes>
 	
+		20160119.2	Edited assembly information.
 		20160119.1	Added IntelliSense information.
 		20160118.6	Changed link to license.
 		20160118.5	Fixed problem with default constructor for WhoisResponse.
