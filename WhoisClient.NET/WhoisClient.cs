@@ -10,6 +10,9 @@ using NetTools;
 
 namespace Whois.NET
 {
+    /// <summary>
+    /// A WhoisClient structure for quering whois servers.
+    /// </summary>
     public class WhoisClient
     {
         /// <summary>
@@ -34,6 +37,14 @@ namespace Whois.NET
             return QueryRecursive(query, new List<string> { server }, port, encoding);
         }
 
+        /// <summary>
+        /// Queries recursively to determine the proper endpoint for an IP or domain.
+        /// </summary>
+        /// <param name="query">The query for the whois server.</param>
+        /// <param name="servers">The list of servers previously queried.</param>
+        /// <param name="port">The port to query.</param>
+        /// <param name="encoding">The encoding to use during the query.</param>
+        /// <returns>A whois response structure containing the results of the whois queries.</returns>
         private static WhoisResponse QueryRecursive(string query, List<string> servers, int port, Encoding encoding)
         {
             var server = servers.Last();

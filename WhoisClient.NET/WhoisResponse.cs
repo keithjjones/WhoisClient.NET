@@ -6,6 +6,9 @@ using NetTools;
 
 namespace Whois.NET
 {
+    /// <summary>
+    /// A structure containing the whois response information.
+    /// </summary>
     [DataContract]
     public class WhoisResponse
     {
@@ -24,6 +27,9 @@ namespace Whois.NET
         [DataMember]
         public IPAddressRange AddressRange { get; set; }
 
+        /// <summary>
+        /// A default constructor.
+        /// </summary>
         public WhoisResponse()
         {
             this.RespondedServers = new string[0];
@@ -31,6 +37,11 @@ namespace Whois.NET
             this.OrganizationName = "";
         }
 
+        /// <summary>
+        /// A constructor that parses the provided response information.
+        /// </summary>
+        /// <param name="responsedServers">The servers that responded to the request.</param>
+        /// <param name="rawWhoisResponse">The raw response from the last server.</param>
         public WhoisResponse(string[] responsedServers, string rawWhoisResponse)
         {
             this.RespondedServers = responsedServers;
