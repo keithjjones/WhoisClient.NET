@@ -20,3 +20,5 @@ Console.WriteLine("{0} - {1}", result.AddressRange.Begin, result.AddressRange.En
 Console.WriteLine("{0}", result.OrganizationName); // "American Registry for Internet Numbers"
 Console.WriteLine(string.Join(" > ", result.RespondedServers)); // "whois.arin.net" 
 ```
+
+Make sure nuget.exe is in your path for building release.
