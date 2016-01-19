@@ -62,7 +62,7 @@
 goto END
 :PACK
 pushd "$(ProjectDir)"
-"$(SolutionDir).nuget\nuget.exe" pack "$(ProjectFileName)" -Prop Configuration=Release;Platform=AnyCPU -o $(OutDir)
+nuget.exe pack "$(ProjectFileName)" -Prop Configuration=Release;Platform=AnyCPU -o $(OutDir)
 :END</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
