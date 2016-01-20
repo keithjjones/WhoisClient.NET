@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>WhoisClient-VS2015</id>
-    <version>20160119.2</version>
+    <version>20160120.1</version>
     <title>WhoisClient.NET-VS2015</title>
     <authors>J.Sakamoto, Keith J. Jones</authors>
     <owners>J.Sakamoto, Keith J. Jones</owners>
@@ -27,6 +27,9 @@
 	</summary>
     <releaseNotes>
 	
+		20160120.1	Created a maximum timeout for the network connections, reads, and writes.  
+					Added a maximum number of retries.  
+					Added this functionality to help with bad network connections.
 		20160119.2	Edited assembly information.
 		20160119.1	Added IntelliSense information.
 		20160118.6	Changed link to license.

@@ -22,8 +22,11 @@ namespace Whois.NET
         /// <param name="server">FQDN of whois server (ex."whois.arin.net"). This parameter is optional (default value is null) to determine server automatically.</param>
         /// <param name="port">TCP port number to connect whois server. This parameter is optional, and default value is 43.</param>
         /// <param name="encoding">Encoding method to decode the result of query. This parameter is optional (default value is null) to using ASCII encoding.</param>
+        /// <param name="timeout">A timespan to limit the connection attempt, in seconds.</param>
+        /// <param name="retries">The number of times a connection will be attempted.</param>
         /// <returns>The strong typed result of query which responded from WHOIS server.</returns>
-        public static WhoisResponse Query(string query, string server = null, int port = 43, Encoding encoding = null)
+        public static WhoisResponse Query(string query, string server = null, int port = 43, 
+            Encoding encoding = null, int timeout = 600, int retries = 10)
         {
             encoding = encoding ?? Encoding.ASCII;
 
@@ -34,7 +37,7 @@ namespace Whois.NET
                 server = "whois.iana.org";
             }
 
-            return QueryRecursive(query, new List<string> { server }, port, encoding);
+            return QueryRecursive(query, new List<string> { server }, port, encoding, timeout, retries);
         }
 
         /// <summary>
@@ -44,21 +47,30 @@ namespace Whois.NET
         /// <param name="servers">The list of servers previously queried.</param>
         /// <param name="port">The port to query.</param>
         /// <param name="encoding">The encoding to use during the query.</param>
+        /// <param name="timeout">A timespan to limit the connection attempt, in seconds.</param>
+        /// <param name="retries">The number of times a connection will be attempted.</param>
         /// <returns>A whois response structure containing the results of the whois queries.</returns>
-        private static WhoisResponse QueryRecursive(string query, List<string> servers, int port, Encoding encoding)
+        private static WhoisResponse QueryRecursive(string query, List<string> servers, int port, 
+            Encoding encoding, int timeout = 600, int retries = 10)
         {
             var server = servers.Last();
 
             string rawResponse = "";
+            int iteration = 0;
 
-            // Remove the "domain" command from other servers
-            if (server == "whois.internic.net" || server == "whois.verisign-grs.com")
+            // Continue to connect within the retries number
+            while (string.IsNullOrWhiteSpace(rawResponse) && iteration < retries)
             {
-                rawResponse = RawQuery("domain " + query, server, port, encoding);
-            }
-            else
-            {
-                rawResponse = RawQuery(query, server, port, encoding);
+                if (server == "whois.internic.net" || server == "whois.verisign-grs.com")
+                {
+                    rawResponse = RawQuery("domain " + query, server, port, encoding, timeout);
+                }
+                else
+                {
+                    // Remove the "domain" command from other servers
+                    rawResponse = RawQuery(query, server, port, encoding, timeout);
+                }
+                iteration++;
             }
 
             // "ReferralServer: whois://whois.apnic.net"
@@ -73,7 +85,7 @@ namespace Whois.NET
             {
                 servers.Add(m2.Groups["refsvr"].Value);
                 if (m2.Groups["port"].Success) port = int.Parse(m2.Groups["port"].Value);
-                return QueryRecursive(query, servers, port, encoding);
+                return QueryRecursive(query, servers, port, encoding, timeout, retries);
             }
             else
                 return new WhoisResponse(servers.ToArray(), rawResponse);
@@ -87,15 +99,34 @@ namespace Whois.NET
         /// <param name="server">FQDN of whois server (ex."whois.arin.net").</param>
         /// <param name="port">TCP port number to connect whois server. This parameter is optional, and default value is 43.</param>
         /// <param name="encoding">Encoding method to decode the result of query. This parameter is optional (default value is null) to using ASCII encoding.</param>
-        /// <returns>The raw data decoded by encoding parameter from WHOIS server responded.</returns>
-        public static string RawQuery(string query, string server, int port = 43, Encoding encoding = null)
+        /// <param name="timeout">A timespan to limit the connection attempt, in seconds.  Function returns empty string if it times out.</param>
+        /// <returns>The raw data decoded by encoding parameter from the WHOIS server that responded, or an empty string if a connection cannot be established.</returns>
+        public static string RawQuery(string query, string server, int port = 43, 
+            Encoding encoding = null, int timeout = 600)
         {
             encoding = encoding ?? Encoding.ASCII;
-            var tcpClient = new TcpClient(server, port);
+            var tcpClient = new TcpClient();
+
+            // Async connect
+            var result = tcpClient.BeginConnect(server, port, null, null);
+
+            // Wait at most timeout
+            var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(timeout));
+
+            if (!success)
+            {
+                // Return an empty string for now.
+                return "";
+            }
+
             try
             {
                 using (var s = tcpClient.GetStream())
                 {
+                    // Specify the timeouts in milliseconds
+                    s.WriteTimeout = timeout * 1000;
+                    s.ReadTimeout = timeout * 1000;
+
                     var queryBytes = Encoding.ASCII.GetBytes(query + "\r\n");
                     s.Write(queryBytes, 0, queryBytes.Length);
 
@@ -112,10 +143,13 @@ namespace Whois.NET
                     return res.ToString();
                 }
             }
-            finally
+            catch
             {
-                tcpClient.Close();
+
             }
+
+            // Return an empty string for now.
+            return "";
         }
     }
 }
