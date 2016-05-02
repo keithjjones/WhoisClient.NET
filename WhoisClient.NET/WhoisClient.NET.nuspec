@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>WhoisClient-VS2015</id>
-    <version>20160120.1</version>
+    <version>20160502.1</version>
     <title>WhoisClient.NET-VS2015</title>
     <authors>J.Sakamoto, Keith J. Jones</authors>
     <owners>J.Sakamoto, Keith J. Jones</owners>
@@ -26,24 +26,24 @@
       The response of the whois query contains strongly typed values, and the raw output.
 	</summary>
     <releaseNotes>
-	
-		20160120.1	Created a maximum timeout for the network connections, reads, and writes.  
-					Added a maximum number of retries.  
-					Added this functionality to help with bad network connections.
-		20160119.2	Edited assembly information.
-		20160119.1	Added IntelliSense information.
-		20160118.6	Changed link to license.
-		20160118.5	Fixed problem with default constructor for WhoisResponse.
-		20160118.4	Relaxed more member protections.
-		20160118.3	Relaxed member protections.
-		20160118.2	Added default constructor for WhoisResponse.
-		20160118.1	Moved all queries to start with IANA.  Improved lookup algorithm.
-		20160115.4	Fixed an issue detecting an organization name.
-		20160115.3	Fixed an issue with an ARIN IP address whois.
-		20160115.2	Changed package metadata.
-		20160115.1	Many bug fixes and enhancements.
-		ver.1.0.2 - Fix bug with port number referral server response.
-		ver.1.0.1 - Single out one record when querying domain.
+      20160502.1	Squashed a minor bug with responded servers output.
+      20160120.1	Created a maximum timeout for the network connections, reads, and writes.
+      Added a maximum number of retries.
+      Added this functionality to help with bad network connections.
+      20160119.2	Edited assembly information.
+      20160119.1	Added IntelliSense information.
+      20160118.6	Changed link to license.
+      20160118.5	Fixed problem with default constructor for WhoisResponse.
+      20160118.4	Relaxed more member protections.
+      20160118.3	Relaxed member protections.
+      20160118.2	Added default constructor for WhoisResponse.
+      20160118.1	Moved all queries to start with IANA.  Improved lookup algorithm.
+      20160115.4	Fixed an issue detecting an organization name.
+      20160115.3	Fixed an issue with an ARIN IP address whois.
+      20160115.2	Changed package metadata.
+      20160115.1	Many bug fixes and enhancements.
+      ver.1.0.2 - Fix bug with port number referral server response.
+      ver.1.0.1 - Single out one record when querying domain.
     </releaseNotes>
     <tags>whois</tags>
   </metadata>
